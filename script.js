@@ -1,12 +1,28 @@
+//Assiging a unique API to a variable 
 const apiKey = 'b91c20d4068f0a4a6d8ec8bd7e3ca3b8'; 
+
+//DOM Elements
 const cityButton = document.getElementById('citybutton');
-const cityName = document.getElementById('cityname');
+const cityName = document.getElementById('city-name');
+const clearEl = document.getElementById("clear-history");
+const currentPicEl = document.getElementById("");
+const currentTempEl = document.getElementById("temperature")
+const currentHumidityEl = document.getElementById("humidity");
+const currentWindEl = document.getElementById("wind-speed");
+const currentUVEl = document.getElementById("UV-index");
+const searchHistoryEl = document.getElementById("search-history")
+let fiveDayEl = document.getElementById("");
+let todaysWeatherEl = document.getElementById("");
+let searchHistory = JSON.parse(localStorage.getItem("search")) || []; 
+
+
+
 
 //`http://api.openweathermap.org/geo/1.0/direct?q=${cityExample}&limit=5&appid=${apiKey}`
 
 function getGeo (){
  const cityValue = cityName.value 
- //console.log(cityValue);
+ console.log(cityValue);
  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
  .then((response) => response.json())
  .then((data) => {
@@ -22,10 +38,13 @@ function getGeo (){
 function getWeather(latitude, longitude){
     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`)
     .then((response) => response.json())
-    .then((data) => {
+    .then((data) => { 
+
+        console.log(data);
+        //console log for debugging 
       
-     showCurrentWeather(data);
-     showPredictedWeather(data);
+     //showCurrentWeather(data);
+     //showPredictedWeather(data);
 
    });
 }
@@ -43,4 +62,22 @@ function showPredictedWeather(data){
     //start at 7 and we need 7 increments 
 }
 
-cityButton.addEventListener('click', getGeo)
+function searchCityHistory() {
+    searchHistoryEl.innerHTML = ""; 
+    for( let i=0; i< searchHistory.length; i++){
+        const historySearchCity = document.createElement("input");
+        historyItem.setAttribute("type", "text");
+        historyItem.setAttribute("readonly", true);
+        historyItem.setAttribute("class", "form-control d-block bg-white");
+        historyItem.setAttribute("value", searchHistory[i]);
+        historyItem.addEventListener("click", function(){
+            getWeather(historyItem.value);
+        })
+        searchHistoryEl.append(historyItem);
+    }
+}
+
+cityButton.addEventListener('click', getGeo)    {
+    localStorage.setItem("search", JSON.stringify(searchHistory));
+    searchCityHistory(); 
+}
