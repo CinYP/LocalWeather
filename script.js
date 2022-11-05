@@ -21,8 +21,10 @@ let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 //`http://api.openweathermap.org/geo/1.0/direct?q=${cityExample}&limit=5&appid=${apiKey}`
 
 function getGeo (){
- const cityValue = cityName.value 
+    const cityValue = cityName.value 
+   // const cityValue = Atlanta;
  console.log(cityValue);
+ //fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
  .then((response) => response.json())
  .then((data) => {
@@ -30,8 +32,17 @@ function getGeo (){
     const latitude = data[0].lat
     const longitude = data[0].lon 
    
- getWeather(latitude, longitude);
-});
+  //console.log(data)
+  //debugging
+
+    localStorage.setItem("search", JSON.stringify(searchHistory))
+
+ 
+   getWeather(latitude, longitude);
+ 
+})
+//.catch(error => console.log(error));
+//debugging
 
 };
 
@@ -40,8 +51,8 @@ function getWeather(latitude, longitude){
     .then((response) => response.json())
     .then((data) => { 
 
-        console.log(data);
-        //console log for debugging 
+    console.log(data);
+      //console log for debugging 
       
      //showCurrentWeather(data);
      //showPredictedWeather(data);
@@ -50,6 +61,22 @@ function getWeather(latitude, longitude){
 }
 
 function showCurrentWeather(data){
+    todaysWeatherEl.classList.remove("d-none");
+
+    const currentDate = new Date(response.data.dt * 1000);
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1; 
+    const year = currentDate.getFullYear();
+    cityName.innerHTML = response.data.name + " (" + month + "/" + day + "/" + year + ")";
+
+    let weatherPic = response.data.weather[0].icon; 
+    currentPicEl.setAttribute("alt", response.data.weather[0].description);
+
+    currentTempEl.innerHTML = "Temperature:" + k2f(response.data.main.temp) + "&#176F";
+
+    currentHumidityEl.innerHTML = "Humidity:" + response.data.main.humidity + "%";
+
+    currentWindEl.innerHTML = "Wind Speed: " + response.data.wind.speed + "MPH";
     //create the elements document.create('<p>')
 
     //get textcontext to parce the data in 
@@ -71,13 +98,24 @@ function searchCityHistory() {
         historyItem.setAttribute("class", "form-control d-block bg-white");
         historyItem.setAttribute("value", searchHistory[i]);
         historyItem.addEventListener("click", function(){
-            getWeather(historyItem.value);
+            //getWeather(historyItem.value);
         })
         searchHistoryEl.append(historyItem);
     }
 }
 
-cityButton.addEventListener('click', getGeo)    {
-    localStorage.setItem("search", JSON.stringify(searchHistory));
-    searchCityHistory(); 
-}
+function renderSearchHistory() { 
+if (searchCityHistory.length > 0) {
+    getWeather(searchHistory[searchHistory.length -1])
+}}
+
+cityButton.addEventListener('click', getGeo)
+
+
+//Clear history button event listener 
+searchHistoryEl.addEventListener("click", function() {
+    localStorage.clear();
+    searchHistory = [];
+    renderSearchHistory();
+})
+
