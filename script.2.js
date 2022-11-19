@@ -24,8 +24,8 @@ function getGeo (){
     .then((response) => response.json())
     .then((data) => {
    
-    const latitude = data[0].lat
-    const longitude = data[0].lon 
+    const latitude = data[0].lat;
+    const longitude = data[0].lon;
 
     //--------Revisit this ---------
     //localStorage.setItem("search", JSON.stringify(searchHistory)) 
@@ -76,10 +76,10 @@ function fiveDayWeather(data){
 //five day weather DOM Elements 
 //-----------------Day One
 const dayOneTemp = document.getElementById('day1temp');
-let dayOneWind = document.getElementById('day1wind');
-let dayOneHumidity = document.getElementById('day1humidity');
+const dayOneWind = document.getElementById('day1wind');
+const dayOneHumidity = document.getElementById('day1humidity');
 const dayOneDate = document.getElementById('day1heading');
-//data elements
+//day one data elements
 const tempOneEl = data.list[1].main.temp; 
 const humidityOneEl = data.list[1].main.humidity;
 const windOneEl = data.list[1].wind.speed;
@@ -171,6 +171,18 @@ function renderSearchHistory() {
   if (searchCityHistory.length > 0) {
       getWeather(searchHistory[searchHistory.length -1])
       //create for-loop for search history array 
+
+
+
+      Example from other example: 
+      function init() {
+  dogNames = JSON.parse(localStorage.getItem("savedDogs"));
+  if(dogNames==null) {
+    dogNames = [];
+
+    dogNames.push(globalBreed);
+  localStorage.setItem("savedDogs", JSON.stringify(dogNames));
+  }
   }};
   */
   
