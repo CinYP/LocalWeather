@@ -9,11 +9,12 @@ const currentPicEl = document.getElementById("");
 const currentTempEl = document.getElementById("temperature")
 const currentHumidityEl = document.getElementById("humidity");
 const currentWindEl = document.getElementById("wind-speed");
-const currentUVEl = document.getElementById("UV-index");
 const searchHistoryEl = document.getElementById("search-history")
 let fiveDayEl = document.getElementById("");
-let todaysWeatherEl = document.getElementById("");
+let todaysWeatherEl = document.getElementById("today-weather");
 let searchHistory = JSON.parse(localStorage.getItem("search")) || []; 
+const cardBody = document.getElementById("card");
+const column = document.getElementById("columnone");
 
 
 
@@ -51,11 +52,32 @@ function getWeather(latitude, longitude){
     .then((response) => response.json())
     .then((data) => { 
 
-    console.log(data);
-      //console log for debugging 
-      
-     //showCurrentWeather(data);
-     //showPredictedWeather(data);
+    console.log(data)
+
+    //Parse response to display current weather
+ /*
+   const currentDate = new Date(data.dt * 1000);
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1; 
+    const year = currentDate.getFullYear();
+    cityName.innerHTML = data.name + " (" + month + "/" + day + "/" + year + ")";
+    //let weatherPic = data.weather[0].icon; 
+   // currentPicEl.setAttribute("alt", data.weather[0].description);
+*/
+        
+    const temp = data.list[0].main.temp;
+        console.log(temp);
+   
+    cardBody.append(currentTempEl);
+    todaysWeatherEl.append(cardBody);
+    
+    currentTempEl.textContent = `temperature: ${temp}`; 
+
+    column.append(todaysWeatherEl);
+
+    //data.list[0].main.temp + "&#176F";
+    console.log(data.list[0].main.temp); 
+
 
    });
 }
@@ -63,20 +85,29 @@ function getWeather(latitude, longitude){
 function showCurrentWeather(data){
     todaysWeatherEl.classList.remove("d-none");
 
-    const currentDate = new Date(response.data.dt * 1000);
+    console.log(data)
+    //Parsing through data - debugging 
+
+    //Parse response to display current weather
+
+   //const currentDate = new Date(response.data.dt * 1000);
+   /*
+   const currentDate = new Date(data.dt * 1000);
     const day = currentDate.getDate();
     const month = currentDate.getMonth() + 1; 
     const year = currentDate.getFullYear();
     cityName.innerHTML = response.data.name + " (" + month + "/" + day + "/" + year + ")";
-
+    cityName.innerHTML = response.data.name + " (" + month + "/" + day + "/" + year + ")";
     let weatherPic = response.data.weather[0].icon; 
-    currentPicEl.setAttribute("alt", response.data.weather[0].description);
+    currentPicEl.setAttribute("alt", data.weather[0].description);
 
     currentTempEl.innerHTML = "Temperature:" + k2f(response.data.main.temp) + "&#176F";
 
     currentHumidityEl.innerHTML = "Humidity:" + response.data.main.humidity + "%";
 
     currentWindEl.innerHTML = "Wind Speed: " + response.data.wind.speed + "MPH";
+    
+*/
     //create the elements document.create('<p>')
 
     //get textcontext to parce the data in 
@@ -88,7 +119,7 @@ function showPredictedWeather(data){
     //create a for-loop 
     //start at 7 and we need 7 increments 
 }
-
+/*
 function searchCityHistory() {
     searchHistoryEl.innerHTML = ""; 
     for( let i=0; i< searchHistory.length; i++){
@@ -102,7 +133,7 @@ function searchCityHistory() {
         })
         searchHistoryEl.append(historyItem);
     }
-}
+} */ 
 
 function renderSearchHistory() { 
 if (searchCityHistory.length > 0) {
@@ -111,7 +142,7 @@ if (searchCityHistory.length > 0) {
 
 cityButton.addEventListener('click', getGeo)
 
-
+/*
 //Clear history button event listener 
 searchHistoryEl.addEventListener("click", function() {
     localStorage.clear();
@@ -119,3 +150,4 @@ searchHistoryEl.addEventListener("click", function() {
     renderSearchHistory();
 })
 
+*/

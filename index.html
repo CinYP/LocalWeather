@@ -22,7 +22,7 @@
     <!-- Search Bar-->
     <div class="container-fluid dynamic-containers">
         <div class="row">
-            <div class="col-lg-3 bg-light">
+            <div class="col-lg-3 bg-light text-dark">
                 <h2> Search City: </h2>
                 <div class="cityInput mb-3">
                     <input type="text" id="city-name" class="form-control" placeholder="Enter a City" aria-label="Enter a City">
@@ -41,19 +41,18 @@
 
             </div>
     <!-- Containers Hook-->
-            <div class="col-lg-9">
+            <div class="col-lg-9" id="columnone">
                     <!-- today's weather-->
                 <div class="row mr-0">
-                    <div class="col-lg-11 card m-3 d-none" id="today-weather">
+                    <div class="col-lg-11 card m-3" id="today-weather">
                         <!--body card -->
-                        <div class="card-body"> 
+                        <div class="card-body" id="card"> 
                             <h3 id="city-name" class="city-name alighn-middle"> </h3>
                         <!-- come back to this - img-->
                             <img id="">
                             <p id="temparature"></p>
                             <p id="humidity"></p>
                             <p id="wind-speed"></p>
-                            <p id="UV-index"></p>
                         </div>
                     </div>
                 </div>
