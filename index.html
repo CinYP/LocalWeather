@@ -33,6 +33,7 @@
                     <input type="text" id="citySearchInput" class="form-control" placeholder="Enter a City" aria-label="Enter a City">
                     <div class="input-button">
                         <button class="btn btn-primary " id="citybutton" type="button">
+
                             <i class="fas fa-search"></i> 
                         </button>
                     </div>
@@ -40,17 +41,17 @@
                 <!-- search history-->
                 <div class="text-muted text-center" id="historyitems">
                    <!--city history will be spanned here-->
-
-                   <h2> Test City </h2>
+                   <!--<button class="btn btn-primary " id="historybutton" type="button"></button> --> 
                  </div>
             </div>
             <!--Containers for Weather Hook-->
             </div class="col-lg-9" id="display-city-stats">
-                <div class="row m-2" id="today weather">
+                <div class="row m-2 classtoday_weather" id="today_weather">
                     <div class="col-lg-11 card m-3" id="today-weather">
                         <!--body card -->
+                        <h2> Today's Forecast</h2>
                         <div class="card-body" id="todayStats"> 
-                           <div><i class="fas fa-sun"></i></div>
+                            <img id="todayImage"> 
                             <h2 id="city-name" class="city-name alighn-middle"> </h2>
                             <h3 id="todayTemp"> </h3>
                             <h3 id="todayWind"> </h3>
@@ -64,40 +65,40 @@
                     </div>
                 </div>
                 <div class="row m-2" id="fiveD-content">
-                    <div class="col-md-2 forecast bg-primary text-white m-2 rounded" id="dayOne">
+                    <div class="col-md-2 forecast bg-primary text-white m-2 rounded" id="dayOne"> 
+                       <img id="dayoneimage">
                        <h3 id="day1heading"></h3> 
-                       <!-- <i class="fa-solid fa-sun"></i> -->
                        <h4 id="day1temp"> </h4>
-                       <h4 id="'day1wind"></h4>
-                       <h4 id="'day1humidity"></h4>
+                       <h4 id="day1wind"> </h4>
+                       <h4 id="day1humidity"> </h4>
                     </div>
                     <div class="col-md-2 forecast bg-primary text-white m-2 rounded" id="dayTwo">
+                        <img id="daytwoimage">
                         <h3 id="day2heading"></h3> 
-                       <!-- <i class="fa-solid fa-sun"></i> -->
                        <h4 id="day2temp"> </h4>
-                       <h4 id="'day2wind"></h4>
-                       <h4 id="'day2humidity"></h4>
+                       <h4 id="day2wind"></h4>
+                       <h4 id="day2humidity"></h4>
                      </div>
                      <div class="col-md-2 forecast bg-primary text-white m-2 rounded" id="dayThree">
+                        <img id="daythreeimage">
                         <h3 id="day3heading"></h3> 
-                        <!-- <i class="fa-solid fa-sun"></i> -->
                         <h4 id="day3temp"> </h4>
-                        <h4 id="'day3wind"></h4>
-                        <h4 id="'day3humidity"></h4>
+                        <h4 id="day3wind"></h4>
+                        <h4 id="day3humidity"></h4>
                      </div>
                      <div class="col-md-2 forecast bg-primary text-white m-2 rounded" id="dayFour">
+                         <img id="dayfourimage">
                         <h3 id="day4heading"></h3> 
-                        <!-- <i class="fa-solid fa-sun"></i> -->
                         <h4 id="day4temp"> </h4>
-                        <h4 id="'day4wind"></h4>
-                        <h4 id="'day4humidity"></h4>
+                        <h4 id="day4wind"></h4>
+                        <h4 id="day4humidity"></h4>
                      </div>
                      <div class="col-md-2 forecast bg-primary text-white m-2 rounded" id="dayFive">
+                         <img id="dayfiveimage">
                         <h3 id="day5heading"></h3> 
-                        <!-- <i class="fa-solid fa-sun"></i> -->
                         <h4 id="day5temp"> </h4>
-                        <h4 id="'day5wind"></h4>
-                        <h4 id="'day5humidity"></h4>
+                        <h4 id="day5wind"></h4>
+                        <h4 id="day5humidity"></h4>
                      </div>
                    
                 </div>
@@ -105,7 +106,7 @@
     </div>
     
 
-<script src="./script.js"></script>
+<script src="./assets/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

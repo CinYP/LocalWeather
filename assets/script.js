@@ -6,20 +6,16 @@ const cityInput = document.getElementById('citySearchInput');
 const citySearchButton = document.getElementById('citybutton');
 const historyEl = document.getElementById('historyitems');
 //five day weather DOM Elements 
-const fiveDayWeatherCard = document.getElementById('fiveD-content');
-const dayOneOfFive = document.getElementById('dayOne');
-const dayTwoOfFive = document.getElementById('dayTwo');
-const dayThreeOfFive = document.getElementById('dayThree');
-const dayFourOfFive = document.getElementById('dayFour');
-const dayFiveOfFive = document.getElementById('dayFive');
-
-//Search history 
-let searchHistory = [];
+// const fiveDayWeatherCard = document.getElementById('fiveD-content');
+// const dayOneOfFive = document.getElementById('dayOne');
+// const dayTwoOfFive = document.getElementById('dayTwo');
+// const dayThreeOfFive = document.getElementById('dayThree');
+// const dayFourOfFive = document.getElementById('dayFour');
+// const dayFiveOfFive = document.getElementById('dayFive');
 
 //Fetching coordinates of city value and setting 
 function getGeo (){
     const cityValue = cityInput.value;
-    //fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
     .then((response) => response.json())
     .then((data) => {
@@ -27,9 +23,21 @@ function getGeo (){
     const latitude = data[0].lat;
     const longitude = data[0].lon;
 
-    //--------Revisit this ---------
-    //localStorage.setItem("search", JSON.stringify(searchHistory)) 
-    searchHistory.push(cityValue);
+    //--------------------------------------
+    // Local Storage
+      // const cityValLS = localStorage.getItem('cityValue') || [];
+      // console.log(cityValLS);
+
+      // const myJSON = JSON.stringify(cityValLS);
+      // console.log(myJSON);
+      // localStorage.setItem("testJSON", myJSON);
+
+      // let cityValLSJASON = JSON.parse(cityValLS);
+      // console.log(cityValLSJASON);
+      // cityValLSJASON.push(cityValue);
+      // if(cityValLSJASON==null) {
+      //   cityValLS = [];}
+      // localStorage.setItem('city', cityValue);
     
     getWeather(latitude, longitude);
 }) 
@@ -49,27 +57,30 @@ function getWeather(latitude, longitude){
 
 function todayWeather(data){
  //today's weather DOM Elements - local scope 
+  //const todayWeatherEl = document.getElementById('classtoday_weather');
   const cityNameEl = document.getElementById('city-name');
   const todayTemp = document.getElementById('todayTemp');
   const todayWind = document.getElementById('todayWind');
   const todayHumidity = document.getElementById('todayHumidity');
-  const tweathericon = document.getElementById('todayImage');
+  const tweathericon = document.getElementsByClassName('todayImage');
   //data variables 
  const cityValue = cityInput.value; 
- //const date = ""; ----- come back to this 
  const temperature = data.list[0].main.temp ; 
  const wind =  data.list[0].wind.speed;
  const humidity = data.list[0].main.humidity;
- const clearSky = '<i class="fa-light fa-stars"></i>';
+ //const description = data.list[0].weather[0].description;
+ const imageicon = data.list[0].weather[0].icon;
+  console.log(imageicon);
+ //removing d-none attribute from today weather
+ //todayWeatherEl.classList.remove("d-none");
 
-  console.log(temperature, wind, humidity);
-
+ //Passing data to dynamically display html
+ tweathericon.src = `http://openweathermap.org/img/wn/${imageicon}@2x.png`; 
+//image link now not working 
  cityNameEl.innerText = `City: ${cityValue}`;
  todayTemp.innerText = `Temperature: ${temperature}`;
  todayWind.innerText = `Wind: ${wind} MPH`;
  todayHumidity.innerText = `Humidity: ${humidity}%`;
-
- console.log(data.list[0].weather[0].description);
 };
 
 function fiveDayWeather(data){
@@ -79,112 +90,114 @@ const dayOneTemp = document.getElementById('day1temp');
 const dayOneWind = document.getElementById('day1wind');
 const dayOneHumidity = document.getElementById('day1humidity');
 const dayOneDate = document.getElementById('day1heading');
+const dayoneImage = document.getElementById('dayoneimage');
 //day one data elements
 const tempOneEl = data.list[1].main.temp; 
 const humidityOneEl = data.list[1].main.humidity;
 const windOneEl = data.list[1].wind.speed;
 const dateOne = data.list[1].dt_txt;
+const day1image = data.list[1].weather[0].icon;
+
 //-----------------Day Two
 const dayTwoTemp = document.getElementById('day2temp');
 const dayTwoWind = document.getElementById('day2wind');
 const dayTwoHumidity = document.getElementById('day2humidity');
 const dayTwoDate = document.getElementById('day2heading');
+const dayTwoImage = document.getElementById('daytwoimage');
 //data elements
 const tempTwoEl = data.list[10].main.temp; 
 const humidityTwoEl = data.list[10].main.humidity;
 const windTwoEl = data.list[10].wind.speed;
 const dateTwo = data.list[10].dt_txt;
+const day2image = data.list[10].weather[0].icon;
 
 //-----------------Day Three
 const dayThreeTemp = document.getElementById('day3temp');
 const dayThreeWind = document.getElementById('day3wind');
 const dayThreeHumidity = document.getElementById('day3humidity');
 const dayThreeDate = document.getElementById('day3heading');
+const dayThreeImage = document.getElementById('daythreeimage');
 //data elements
 const tempThreeEl = data.list[20].main.temp; 
 const humidityThreeEl = data.list[20].main.humidity;
 const windThreeEl = data.list[20].wind.speed;
 const dateThree = data.list[20].dt_txt;
+const day3image = data.list[20].weather[0].icon;
 
 //-----------------Day Four
 const dayFourTemp = document.getElementById('day4temp');
 const dayFourWind = document.getElementById('day4wind');
 const dayFourHumidity = document.getElementById('day4humidity');
 const dayFourDate = document.getElementById('day4heading');
+const dayFourImage = document.getElementById('dayfourimage');
 //data elements
 const tempFourEl = data.list[30].main.temp; 
 const humidityFourEl = data.list[30].main.humidity;
 const windFourEl = data.list[30].wind.speed;
 const dateFour = data.list[30].dt_txt;
+const day4image = data.list[30].weather[0].icon;
 
 //-----------------Day Five
 const dayFiveTemp = document.getElementById('day5temp');
 const dayFiveWind = document.getElementById('day5wind');
 const dayFiveHumidity = document.getElementById('day5humidity');
 const dayFiveDate = document.getElementById('day5heading');
+const dayFiveImage = document.getElementById('dayfiveimage');
+
 //data elements
 const tempFiveEl = data.list[35].main.temp; 
 const humidityFiveEl = data.list[35].main.humidity;
 const windFiveEl = data.list[35].wind.speed;
 const dateFive = data.list[35].dt_txt;
+const day5image = data.list[35].weather[0].icon;
 
 //-------------------------- Day One Passing Data 
-//Image goes here 
+//Image goes here
+dayoneImage.src = `http://openweathermap.org/img/wn/${day1image}@2x.png`; 
 dayOneDate.innerText = `Date: ${dateOne}`;
 dayOneTemp.innerText = `Temp: ${tempOneEl}`; 
 dayOneWind.innerText = `Wind: ${windOneEl}`;
 dayOneHumidity.innerText = `Humidity: ${humidityOneEl}`;
-console.log(`day one - Wind: ${windOneEl}`);
-console.log(`day one -Humidity: ${humidityOneEl}`);
-
 //-------------------------- Day Two Passing Data 
-//Image goes here 
+dayTwoImage.src=`http://openweathermap.org/img/wn/${day2image}@2x.png`; 
 dayTwoDate.innerText = `Date: ${dateTwo}`;
 dayTwoTemp.innerText = `Temp: ${tempTwoEl}`;
-console.log(`day two - Wind: ${windTwoEl}`);
-console.log(`day two -Humidity: ${humidityTwoEl}`);
-
+dayTwoWind.innerText = `Wind: ${windTwoEl}`
+dayTwoHumidity.innerText = `Humidity: ${humidityTwoEl}`;
 //-------------------------- Day Three Passing Data 
-//Image goes here 
+dayThreeImage.src=`http://openweathermap.org/img/wn/${day3image}@2x.png`;
 dayThreeDate.innerText = `Date: ${dateThree}`;
 dayThreeTemp.innerText = `Temp: ${tempThreeEl}`;
-console.log(`day three - Wind: ${windThreeEl}`);
-console.log(`day three -Humidity: ${humidityThreeEl}`);
-
+dayThreeWind.innerText = `Wind: ${windThreeEl}`;
+dayThreeHumidity.innerText = `Humidity: ${humidityThreeEl}`;
 //-------------------------- Day Four Passing Data 
-//Image goes here 
+dayFourImage.src=`http://openweathermap.org/img/wn/${day4image}@2x.png`;
 dayFourDate.innerText = `Date: ${dateFour}`;
 dayFourTemp.innerText = `Temp: ${tempFourEl}`;
-console.log(`day four - Wind: ${windFourEl}`);
-console.log(`day four -Humidity: ${humidityFourEl}`);
-
+dayFourWind.innerText = `Wind: ${windFourEl}`;
+dayFourHumidity.innerText = `Humidity: ${humidityFourEl}`;
 //-------------------------- Day Five Passing Data 
-//Image goes here 
+dayFiveImage.src=`http://openweathermap.org/img/wn/${day5image}@2x.png`;
 dayFiveDate.innerText = `Date: ${dateFive}`;
 dayFiveTemp.innerText = `Temp: ${tempFiveEl}`;
-console.log(`day five - Wind: ${windFiveEl}`);
-console.log(`day five -Humidity: ${humidityFiveEl}`);
-
+dayFiveWind.innerText = `Temp:${windFiveEl}`;
+dayFiveHumidity.innerText = `Humidity: ${humidityFiveEl}`;
 };
-/*
+
 function renderSearchHistory() { 
-  if (searchCityHistory.length > 0) {
-      getWeather(searchHistory[searchHistory.length -1])
-      //create for-loop for search history array 
+  console.log('local storage')
+  if (searchHistory.length > 0) {
+ for (let i = 0; i < searchHistory.length; i++) {
+      console.log('creating button....')
+    //create for-loop for search history array
+ }
 
-
-
-      Example from other example: 
-      function init() {
-  dogNames = JSON.parse(localStorage.getItem("savedDogs"));
-  if(dogNames==null) {
-    dogNames = [];
-
-    dogNames.push(globalBreed);
-  localStorage.setItem("savedDogs", JSON.stringify(dogNames));
-  }
-  }};
-  */
+}
+};
   
-  //Event Listener on 
+  //Event Listener on city search button
   citySearchButton.addEventListener('click', getGeo);
+
+  //Event Listener on the local storage buttons 
+  //searchhistoryButtons.addEventListener('click'.getGeo)
+
