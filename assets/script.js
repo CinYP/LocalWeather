@@ -5,13 +5,6 @@ const apiKey = 'b91c20d4068f0a4a6d8ec8bd7e3ca3b8';
 const cityInput = document.getElementById('citySearchInput');
 const citySearchButton = document.getElementById('citybutton');
 const historyEl = document.getElementById('historyitems');
-//five day weather DOM Elements 
-// const fiveDayWeatherCard = document.getElementById('fiveD-content');
-// const dayOneOfFive = document.getElementById('dayOne');
-// const dayTwoOfFive = document.getElementById('dayTwo');
-// const dayThreeOfFive = document.getElementById('dayThree');
-// const dayFourOfFive = document.getElementById('dayFour');
-// const dayFiveOfFive = document.getElementById('dayFive');
 
 //Fetching coordinates of city value and setting 
 function getGeo (){
