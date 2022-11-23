@@ -184,13 +184,8 @@ function renderSearchHistory() {
       console.log('creating button....')
     //create for-loop for search history array
  }
-
 }
 };
   
-  //Event Listener on city search button
-  citySearchButton.addEventListener('click', getGeo);
-
-  //Event Listener on the local storage buttons 
-  //searchhistoryButtons.addEventListener('click'.getGeo)
-
+ //Event Listener on city search button
+ citySearchButton.addEventListener('click', getGeo);
