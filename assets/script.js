@@ -5,10 +5,12 @@ const apiKey = 'b91c20d4068f0a4a6d8ec8bd7e3ca3b8';
 const cityInput = document.getElementById('citySearchInput');
 const citySearchButton = document.getElementById('citybutton');
 const historyEl = document.getElementById('historyitems');
+let searchHistory = [];
 
 //Fetching coordinates of city value and setting 
-function getGeo (){
-    const cityValue = cityInput.value;
+function getGeo (city){
+    let cityValue = city;
+    console.log(cityValue);
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
     .then((response) => response.json())
     .then((data) => {
@@ -16,22 +18,8 @@ function getGeo (){
     const latitude = data[0].lat;
     const longitude = data[0].lon;
 
-    //--------------------------------------
-    // Local Storage
-      // const cityValLS = localStorage.getItem('cityValue') || [];
-      // console.log(cityValLS);
 
-      // const myJSON = JSON.stringify(cityValLS);
-      // console.log(myJSON);
-      // localStorage.setItem("testJSON", myJSON);
-
-      // let cityValLSJASON = JSON.parse(cityValLS);
-      // console.log(cityValLSJASON);
-      // cityValLSJASON.push(cityValue);
-      // if(cityValLSJASON==null) {
-      //   cityValLS = [];}
-      // localStorage.setItem('city', cityValue);
-    
+    appendToSearchHistory(cityValue);
     getWeather(latitude, longitude);
 }) 
 }; 
@@ -55,21 +43,18 @@ function todayWeather(data){
   const todayTemp = document.getElementById('todayTemp');
   const todayWind = document.getElementById('todayWind');
   const todayHumidity = document.getElementById('todayHumidity');
-  const tweathericon = document.getElementsByClassName('todayImage');
+  const tweathericon = document.getElementById('todayImage');
   //data variables 
- const cityValue = cityInput.value; 
+ const cityValue = data.city.name; 
  const temperature = data.list[0].main.temp ; 
  const wind =  data.list[0].wind.speed;
  const humidity = data.list[0].main.humidity;
  //const description = data.list[0].weather[0].description;
  const imageicon = data.list[0].weather[0].icon;
   console.log(imageicon);
- //removing d-none attribute from today weather
- //todayWeatherEl.classList.remove("d-none");
 
  //Passing data to dynamically display html
  tweathericon.src = `http://openweathermap.org/img/wn/${imageicon}@2x.png`; 
-//image link now not working 
  cityNameEl.innerText = `City: ${cityValue}`;
  todayTemp.innerText = `Temperature: ${temperature}`;
  todayWind.innerText = `Wind: ${wind} MPH`;
@@ -177,15 +162,67 @@ dayFiveWind.innerText = `Temp:${windFiveEl}`;
 dayFiveHumidity.innerText = `Humidity: ${humidityFiveEl}`;
 };
 
-function renderSearchHistory() { 
-  console.log('local storage')
-  if (searchHistory.length > 0) {
- for (let i = 0; i < searchHistory.length; i++) {
-      console.log('creating button....')
-    //create for-loop for search history array
- }
-}
+function appendToSearchHistory(cityValue) {
+   if (searchHistory.indexOf(cityValue) !== -1){
+    return; 
+   };
+   searchHistory.push(cityValue);
+   localStorage.setItem("cityArrray", JSON.stringify(searchHistory));
+   renderSearchHistory()
+
 };
+
+function renderSearchHistory() { 
+   historyEl.innerHTML = "";
+  
+    for (let i = searchHistory.length -1; i >= 0; i--) {
+         console.log('creating button....')
+
+         let btn = document.createElement("button");
+         btn.setAttribute("type", "button"); 
+        btn.classList.add("buttonstyle");
+         btn.textContent = searchHistory[i]; 
+       
+
+        btn.setAttribute("data-search",searchHistory[i]);
+        historyEl.append(btn);
+    }
+ 
+};
+
+function handleHistoryClick(event){
+  if (!event.target.matches(".buttonstyle")){
+    return;
+  }
+  let btn = event.target;
+  let city = btn.getAttribute("data-search");
+
+  getGeo(city)
+};
+
+function handleSearchClick(event){
+  if(!cityInput.value){
+    return;
+  }
+  event.preventDefault();
+  let city = cityInput.value.trim();
+  console.log(city);
+  getGeo(city);
+  cityInput.value = "";
+}
+
+function init(){
+  let storedHistory = localStorage.getItem("cityArrray");
+  console.log(storedHistory);
+  if(storedHistory){
+    searchHistory = JSON.parse(storedHistory);
+  }
+  renderSearchHistory();
+}
+
   
  //Event Listener on city search button
- citySearchButton.addEventListener('click', getGeo);
+ citySearchButton.addEventListener('click', handleSearchClick);
+//Event listener for the buttons
+ historyEl.addEventListener('click', handleHistoryClick);
+ init();

@@ -1,0 +1,39 @@
+/* Defining universal items - Box-sizing helps make styling easier*/
+*, *::before, *::after {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark: #000000;
+    --white: #FFFFFF;
+    --bbyblue: #A5D1F3;
+    }
+
+.citysearch-area{
+    margin: 5px;;
+    display: block;
+    background-color: var(--bbyblue);
+    color: var(--dark)
+
+}
+    /* styling the search history buttons */
+.buttonstyle{
+    display: block;
+    justify-content: center;
+    text-align:center; 
+    border: 1px solid var(--white);
+    width: 100%; 
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 2px;
+    color: var(--dark);
+}
+
+.forecast{
+    text-align:center; 
+    padding: 2px;
+}
+
+
+
