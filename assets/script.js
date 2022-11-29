@@ -18,7 +18,14 @@ function getGeo (city){
     const latitude = data[0].lat;
     const longitude = data[0].lon;
 
+    //rendering elements to display weather 
+    const todayForecastEl = document.getElementById("today-weather");
+    const fiveDayWeatherEl = document.getElementById("fiveD-title")
+   
+    todayForecastEl.classList.remove("d-none");
+    fiveDayWeatherEl.classList.remove("d-none");
 
+    
     appendToSearchHistory(cityValue);
     getWeather(latitude, longitude);
 }) 
