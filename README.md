@@ -8,6 +8,10 @@
 
  Local Weather Application 
 
+ ## Application Image 
+
+    <img src="./assets/images/Screen Shot 2022-11-28 at 8.08.43 PM.png">
+
   ## Description
 
   Appication that allows users to search for weather data in their home town. 
