@@ -61,7 +61,7 @@ function todayWeather(data){
   console.log(imageicon);
 
  //Passing data to dynamically display html
- tweathericon.src = `http://openweathermap.org/img/wn/${imageicon}@2x.png`; 
+ tweathericon.src = `https://openweathermap.org/img/wn/${imageicon}@2x.png`; 
  cityNameEl.innerText = `City: ${cityValue}`;
  todayTemp.innerText = `Temperature: ${temperature}`;
  todayWind.innerText = `Wind: ${wind} MPH`;
@@ -138,31 +138,31 @@ const day5image = data.list[35].weather[0].icon;
 
 //-------------------------- Day One Passing Data 
 //Image goes here
-dayoneImage.src = `http://openweathermap.org/img/wn/${day1image}@2x.png`; 
+dayoneImage.src = `https://openweathermap.org/img/wn/${day1image}@2x.png`; 
 dayOneDate.innerText = `Date: ${dateOne}`;
 dayOneTemp.innerText = `Temp: ${tempOneEl}`; 
 dayOneWind.innerText = `Wind: ${windOneEl}`;
 dayOneHumidity.innerText = `Humidity: ${humidityOneEl}`;
 //-------------------------- Day Two Passing Data 
-dayTwoImage.src=`http://openweathermap.org/img/wn/${day2image}@2x.png`; 
+dayTwoImage.src=`https://openweathermap.org/img/wn/${day2image}@2x.png`; 
 dayTwoDate.innerText = `Date: ${dateTwo}`;
 dayTwoTemp.innerText = `Temp: ${tempTwoEl}`;
 dayTwoWind.innerText = `Wind: ${windTwoEl}`
 dayTwoHumidity.innerText = `Humidity: ${humidityTwoEl}`;
 //-------------------------- Day Three Passing Data 
-dayThreeImage.src=`http://openweathermap.org/img/wn/${day3image}@2x.png`;
+dayThreeImage.src=`https://openweathermap.org/img/wn/${day3image}@2x.png`;
 dayThreeDate.innerText = `Date: ${dateThree}`;
 dayThreeTemp.innerText = `Temp: ${tempThreeEl}`;
 dayThreeWind.innerText = `Wind: ${windThreeEl}`;
 dayThreeHumidity.innerText = `Humidity: ${humidityThreeEl}`;
 //-------------------------- Day Four Passing Data 
-dayFourImage.src=`http://openweathermap.org/img/wn/${day4image}@2x.png`;
+dayFourImage.src=`https://openweathermap.org/img/wn/${day4image}@2x.png`;
 dayFourDate.innerText = `Date: ${dateFour}`;
 dayFourTemp.innerText = `Temp: ${tempFourEl}`;
 dayFourWind.innerText = `Wind: ${windFourEl}`;
 dayFourHumidity.innerText = `Humidity: ${humidityFourEl}`;
 //-------------------------- Day Five Passing Data 
-dayFiveImage.src=`http://openweathermap.org/img/wn/${day5image}@2x.png`;
+dayFiveImage.src=`https://openweathermap.org/img/wn/${day5image}@2x.png`;
 dayFiveDate.innerText = `Date: ${dateFive}`;
 dayFiveTemp.innerText = `Temp: ${tempFiveEl}`;
 dayFiveWind.innerText = `Temp:${windFiveEl}`;
