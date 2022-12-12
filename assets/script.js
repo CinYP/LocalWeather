@@ -11,7 +11,7 @@ let searchHistory = [];
 function getGeo (city){
     let cityValue = city;
     console.log(cityValue);
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=5&appid=${apiKey}`)
     .then((response) => response.json())
     .then((data) => {
    
@@ -33,7 +33,7 @@ function getGeo (city){
 
 //Fetching data using Latitude and Longitude from the city value 
 function getWeather(latitude, longitude){
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`)
     .then((response) => response.json())
     .then((data) => { 
         const temperature = data.list[0]
